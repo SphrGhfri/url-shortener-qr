@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pymongo
+python-dotenv
+PyJWT
+pytest
+pydantic
+pydantic[email]
+passlib
+shortuuid
+mongomock
+qrcode[pil]
+pillow
+httpx
