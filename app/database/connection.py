@@ -2,7 +2,7 @@
 
 import os
 from pymongo import MongoClient
-from pymongo.errors import OperationFailure
+from pymongo.errors import OperationFailure, ConfigurationError, ConnectionFailure
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -54,9 +54,14 @@ try:
     user_collection.create_index([("email", 1)], unique=True)
     url_collection.create_index([("original_url", 1)], unique=True)
 
+except ConnectionFailure as e:
+    print(f"Failed to connect to MongoDB: {e}")
 except OperationFailure as e:
     print(f"MongoDB operation failed: {e}")
-
+except ConfigurationError as e:
+    print(f"MongoDB configuration error: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
 
 # Dependency injection functions
 def get_db():
